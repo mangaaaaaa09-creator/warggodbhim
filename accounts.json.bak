@@ -1,0 +1,66 @@
+[
+  {
+    "uid": 8296257409,
+    "password": "BLRX-HELLOGB9GJH",
+    "account_id": "18758844290",
+    "name": "hello__4476",
+    "region": "ME",
+    "date_created": "2026-10-16 23:22:00"
+  },
+  {
+    "uid": 8297849989,
+    "password": "BLRX-HELLONG81ST",
+    "account_id": "18763055575",
+    "name": "hello__2170",
+    "region": "ME",
+    "date_created": "2026-10-17 07:55:09"
+  },
+  {
+    "uid": 8297849980,
+    "password": "BLRX-HELLOZ8FKZ6",
+    "account_id": "18763055578",
+    "name": "hello__3136",
+    "region": "ME",
+    "date_created": "2026-10-17 07:55:09"
+  },
+  {
+    "uid": 8297850408,
+    "password": "BLRX-HELLO47LNZI",
+    "account_id": "18763056556",
+    "name": "hello__4425",
+    "region": "ME",
+    "date_created": "2026-10-17 07:55:14"
+  },
+  {
+    "uid": 8299701894,
+    "password": "BLRX-HELLOC6D58N",
+    "account_id": "18766951230",
+    "name": "hello__2871",
+    "region": "ME",
+    "date_created": "2026-10-17 13:22:50"
+  },
+  {
+    "uid": 8299701892,
+    "password": "BLRX-HELLOMMF95V",
+    "account_id": "18766951250",
+    "name": "hello__8214",
+    "region": "ME",
+    "date_created": "2026-10-17 13:22:50"
+  },
+  {
+    "uid": 8299702442,
+    "password": "BLRX-HELLOR3P95U",
+    "account_id": "18766952415",
+    "name": "hello__7951",
+    "region": "ME",
+    "date_created": "2026-10-17 13:22:55"
+  },
+  {
+    "uid": 8299702445,
+    "password": "BLRX-HELLO6H95VH",
+    "account_id": "18766952430",
+    "name": "hello__5729",
+    "region": "ME",
+    "date_created": "2026-10-17 13:22:55"
+  }
+]

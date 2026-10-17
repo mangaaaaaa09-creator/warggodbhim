@@ -1,0 +1,9 @@
+Flask==3.0.3
+Flask-Cors==4.0.1
+requests==2.32.3
+httpx==0.27.2
+pycryptodome==3.20.0
+google-play-scraper==1.2.7
+protobuf-decoder==0.0.4
+protobuf==5.28.2
+urllib3==2.2.3
