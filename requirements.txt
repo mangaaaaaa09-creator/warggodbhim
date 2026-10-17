@@ -1,0 +1,9 @@
+Flask
+Flask-Cors
+requests
+httpx
+pycryptodome
+google-play-scraper
+protobuf-decoder
+protobuf
+urllib3
