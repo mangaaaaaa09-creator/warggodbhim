@@ -1,0 +1,24 @@
+============================================================
+       DARK MASTER - GENERATION SUMMARY
+============================================================
+
+Session    : 2026-10-13_18-45-40
+Folder     : DARK_MASTER
+Server     : India (IND)
+Total Gen  : 5
+UID Files  : 5
+JWT Files  : 5
+Prefix     : gojole
+Created    : 2026-10-13 22:11:02
+
+============================================================
+FILES IN THIS FOLDER:
+============================================================
+  > DARK_MASTER.json  ->  UID + Password list
+  > jwt_tokens.json    ->  JWT + Access Token list
+  > summary.txt        ->  This file
+
+============================================================
+CREATOR : DARK MASTER
+BUILD   : DARK_MASTER
+============================================================
