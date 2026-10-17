@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#070708">
+  <title>FFGlory — Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* إصلاح العرض الكامل */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { 
+      width: 100%;
+      min-height: 100vh; 
+      background-color: #070708; 
+      color: #F3F4F6; 
+      font-family: 'Inter', 'Tajawal', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* إزالة الحواف الخارجية باش الكارت يلصق في الحرف */
+    body.auth-page { 
+      display: flex; 
+      justify-content: center; 
+      align-items: flex-start; 
+      padding: 0; /* هنا التعديل: حينا الـ padding */
+      background: #070708; 
+    }
+    
+    .auth-shell { 
+      width: 100%; 
+      max-width: 100%; 
+      margin: 0 auto; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 0; /* إزالة الفراغ بين البطاقات */
+    }
+    
+    /* Telegram Banner - ياخذ العرض الكامل من الحرف للحرف */
+    .telegram-banner { 
+      display: grid; 
+      grid-template-columns: 50px minmax(0, 1fr); 
+      align-items: center; 
+      gap: 12px; 
+      padding: 20px 16px; /* padding داخلي كيما الصورة */
+      background: #121215; 
+      border: none; /* إزالة الحدود باش يلصق */
+      border-bottom: 1px solid rgba(255,140,0,0.3); 
+      border-radius: 0; /* إزالة الحواف الدائرية */
+      box-shadow: none; 
+      width: 100%; 
+    }
+    .telegram-icon { 
+      display: grid; 
+      place-items: center; 
+      width: 50px; 
+      height: 50px; 
+      background: linear-gradient(135deg, #FF9800, #E67E22); 
+      border-radius: 15px; 
+      box-shadow: 0 0 20px rgba(255,152,0,0.5); 
+    }
+    .telegram-icon svg { width: 26px; height: 26px; fill: #070708; }
+    .telegram-copy strong { display: block; color: #FFF; font-size: 15px; font-weight: 800; }
+    .telegram-copy p { color: #9CA3AF; font-size: 13px; margin-top: 3px; }
+    .telegram-button { 
+      grid-column: 1 / -1; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      width: 100%; 
+      min-height: 54px; 
+      padding: 14px; 
+      background: linear-gradient(135deg, #FF9800, #E67E22); 
+      color: #070708; 
+      border-radius: 15px; 
+      font-size: 16px; 
+      font-weight: 900; 
+      text-decoration: none; 
+      box-shadow: 0 6px 22px rgba(255,152,0,0.5); 
+      margin-top: 8px;
+    }
+
+    /* Auth Card - ياخذ العرض الكامل من الحرف للحرف */
+    .auth-card { 
+      width: 100%; 
+      padding: 30px 16px; /* padding داخلي كيما الصورة */
+      background: #121215; 
+      border: none; /* إزالة الحدود */
+      border-radius: 0; /* إزالة الحواف الدائرية */
+      box-shadow: none; 
+      position: relative; 
+      overflow: hidden; 
+      margin-top: 1px; /* فراغ بسيط بين البطاقات */
+    }
+    .auth-card::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; left: 0; width: 100%; height: 3px; 
+      background: linear-gradient(90deg, transparent, #FF9800, transparent); 
+    }
+    
+    .auth-brand { display: flex; justify-content: center; margin-bottom: 16px; }
+    .auth-brand-mark { 
+      display: grid; 
+      place-items: center; 
+      width: 64px; 
+      height: 64px; 
+      background: linear-gradient(135deg, #FF9800, #E67E22); 
+      border-radius: 18px; 
+      box-shadow: 0 0 30px rgba(255,152,0,0.6); 
+    }
+    .auth-brand-mark svg { width: 34px; height: 34px; fill: #070708; }
+    
+    .auth-title { text-align: center; margin-bottom: 22px; }
+    .auth-title h1 { margin: 0 0 6px; font-size: 28px; font-weight: 900; color: #FFF; }
+    .auth-title p { color: #9CA3AF; font-size: 14px; }
+    .auth-title b { color: #FF9800; }
+
+    /* Tabs - كبار ومتناسقين */
+    .auth-tabs { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 8px; 
+      padding: 5px; 
+      margin-bottom: 24px; 
+      background: #070708; 
+      border: 1px solid #2B2B33; 
+      border-radius: 16px; 
+    }
+    .auth-tab { 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 52px; 
+      padding: 12px; 
+      border: none; 
+      border-radius: 13px; 
+      background: transparent; 
+      color: #6B7280; 
+      font-size: 15px; 
+      font-weight: 800; 
+      cursor: pointer; 
+      transition: all 0.2s ease;
+    }
+    .auth-tab.active { 
+      background: linear-gradient(135deg, #FF9800, #E67E22); 
+      color: #070708; 
+      font-weight: 900; 
+      box-shadow: 0 6px 20px rgba(255,152,0,0.5); 
+    }
+
+    /* Inputs - كبار وواضحين */
+    .field-label { 
+      display: block; 
+      margin: 16px 0 8px; 
+      color: #9CA3AF; 
+      font-size: 13px; 
+      font-weight: 800; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px;
+    }
+    .auth-input { 
+      width: 100%; 
+      min-height: 60px; 
+      display: flex; 
+      align-items: center; 
+      gap: 14px; 
+      padding: 0 18px; 
+      background: #18181C; 
+      border: 1px solid #2B2B33; 
+      border-radius: 16px; 
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.6); 
+      transition: all 0.2s ease;
+    }
+    .auth-input:focus-within { 
+      border-color: #FF9800; 
+      box-shadow: 0 0 18px rgba(255,152,0,0.3), inset 0 2px 6px rgba(0,0,0,0.6); 
+      background: #1C1C22; 
+    }
+    .auth-input svg { width: 24px; height: 24px; fill: none; stroke: #6B7280; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .auth-input:focus-within svg { stroke: #FF9800; }
+    .auth-input input { 
+      width: 100%; 
+      height: 58px; 
+      padding: 0; 
+      background: transparent; 
+      border: 0; 
+      outline: 0; 
+      color: #FFF; 
+      font-size: 16px; 
+    }
+    .auth-input input::placeholder { color: #555; }
+
+    /* زر الإرسال الرئيسي - برتقالي متوهج */
+    .auth-submit { 
+      width: 100%; 
+      min-height: 60px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 12px; 
+      margin-top: 24px; 
+      padding: 16px; 
+      border: 0; 
+      border-radius: 16px; 
+      background: #6A7BFF; 
+      color: #FFFFFF; 
+      font-size: 18px; 
+      font-weight: 900; 
+      cursor: pointer; 
+      box-shadow: 0 0 30px rgba(106, 123, 255, 0.7); 
+      transition: all 0.2s ease;
+    }
+    .auth-submit:active { transform: scale(0.98); box-shadow: 0 0 20px rgba(106, 123, 255, 0.5); }
+    
+    .auth-form.hidden { display: none !important; }
+    .auth-message { color: #EF4444; font-size: 14px; margin-top: 10px; font-weight: 700; }
+    .auth-success { color: #10B981; font-size: 14px; margin-top: 10px; font-weight: 700; }
+    
+    .auth-divider { height: 1px; margin: 24px 0 18px; background: #2B2B33; }
+    .auth-help { margin-bottom: 12px; color: #9CA3AF; text-align: center; font-size: 14px; font-weight: 700; }
+    .auth-telegram-link { 
+      width: 100%; 
+      min-height: 56px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 10px; 
+      padding: 14px; 
+      background: #18181C; 
+      border: 1px solid #2B2B33; 
+      border-radius: 15px; 
+      color: #F3F4F6; 
+      font-size: 15px; 
+      font-weight: 800; 
+      text-decoration: none; 
+      transition: background 0.2s ease;
+    }
+    .auth-telegram-link:active { background: #22222A; }
+    .auth-telegram-link svg { width: 20px; height: 20px; fill: currentColor; }
+    .auth-tagline { 
+      margin-top: 22px; 
+      color: #6B7280; 
+      font-size: 10px; 
+      font-weight: 900; 
+      letter-spacing: 1.5px; 
+      text-align: center; 
+    }
+    .auth-tagline span { color: #FF9800; padding: 0 4px; }
+
+    /* FFGlory reference theme: black surfaces + orange accents */
+    body.auth-page { padding: 58px 16px 48px; background: #070708; }
+    .auth-shell { width: 100%; max-width: 720px; gap: 0; }
+    .telegram-banner { grid-template-columns: 70px minmax(0,1fr); gap: 16px; padding: 26px; background:#121215; border:1px solid rgba(255,152,0,.22); border-radius:30px; box-shadow:0 16px 35px rgba(0,0,0,.28); }
+    .telegram-icon { width:68px; height:68px; border-radius:20px; }
+    .telegram-copy strong { font-size:17px; }
+    .telegram-copy p { font-size:15px; margin-top:7px; }
+    .telegram-button { min-height:74px; margin-top:4px; border-radius:20px; }
+    .auth-card { margin-top:62px; padding:42px 32px 46px; background:#121215; border:1px solid rgba(255,152,0,.22); border-radius:38px; box-shadow:0 22px 55px rgba(0,0,0,.36); }
+    .auth-card::before { height:2px; }
+    .auth-brand-mark { width:88px; height:88px; border-radius:25px; }
+    .auth-title { margin-bottom:42px; }
+    .auth-title h1 { font-size:36px; }
+    .auth-title p { font-size:17px; margin-top:22px; }
+    .auth-tabs { margin-bottom:34px; border-radius:24px; }
+    .auth-tab { min-height:70px; border-radius:17px; font-size:18px; }
+    .field-label { margin:22px 0 12px; font-size:15px; }
+    .auth-input { min-height:88px; border-radius:23px; padding:0 24px; }
+    .auth-input input { height:84px; font-size:20px; }
+    .auth-submit { min-height:76px; margin-top:44px; border-radius:19px; background:linear-gradient(110deg,#ff9800,#e9821c); color:#080808; box-shadow:0 10px 28px rgba(255,152,0,.28); }
+    .auth-submit:active { transform:scale(.985); box-shadow:0 5px 18px rgba(255,152,0,.24); }
+    .auth-divider { margin:32px 0 24px; }
+    .auth-help { font-size:16px; }
+    .auth-telegram-link { min-height:76px; border-radius:20px; }
+    .auth-tagline { margin-top:30px; letter-spacing:3px; }
+    @media(max-width:520px) {
+      body.auth-page { padding:24px 14px 34px; }
+      .auth-shell { max-width:100%; }
+      .telegram-banner { grid-template-columns:52px minmax(0,1fr); gap:12px; padding:18px; border-radius:23px; }
+      .telegram-icon { width:52px; height:52px; border-radius:15px; }
+      .telegram-copy strong { font-size:14px; }
+      .telegram-copy p { font-size:12px; }
+      .telegram-button { min-height:56px; border-radius:15px; }
+      .auth-card { margin-top:30px; padding:30px 20px 32px; border-radius:28px; }
+      .auth-brand-mark { width:70px; height:70px; border-radius:21px; }
+      .auth-title { margin-bottom:28px; }
+      .auth-title h1 { font-size:29px; }
+      .auth-title p { font-size:14px; margin-top:12px; }
+      .auth-tabs { margin-bottom:24px; }
+      .auth-tab { min-height:54px; font-size:15px; }
+      .field-label { font-size:12px; margin:16px 0 8px; }
+      .auth-input { min-height:62px; padding:0 16px; border-radius:17px; }
+      .auth-input input { height:60px; font-size:16px; }
+      .auth-submit { min-height:60px; margin-top:26px; font-size:17px; }
+      .auth-telegram-link { min-height:60px; font-size:13px; }
+      .auth-tagline { font-size:10px; letter-spacing:2px; }
+    }
+  </style>
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    
+    <!-- Telegram Banner -->
+    <aside class="telegram-banner">
+      <span class="telegram-icon">
+        <svg viewBox="0 0 24 24"><path d="M21.6 4.2 18.4 20c-.2 1.1-.8 1.4-1.7.9l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.4-4.9 8.9-8c.4-.4-.1-.6-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5L20 3.2c.9-.3 1.8.2 1.6 1z"/></svg>
+      </span>
+      <div class="telegram-copy">
+        <strong>Wargood · Top 1</strong>
+        <p>Join our Telegram — get 1 free credit</p>
+      </div>
+      <a class="telegram-button" href="https://t.me/wargood_officiel" target="_blank" rel="noopener noreferrer">Open Telegram ↗</a>
+    </aside>
+
+    <!-- Auth Card -->
+    <section class="auth-card">
+      <div class="auth-brand">
+        <span class="auth-brand-mark">
+          <svg viewBox="0 0 32 32"><path d="m18 3-12 15h9l-1 11 12-16h-9z"/></svg>
+        </span>
+      </div>
+      <div class="auth-title">
+        <h1 id="auth-heading">Welcome Back</h1>
+        <p id="auth-subtitle">Sign in to <b>FFGlory</b> panel</p>
+      </div>
+
+      <div class="auth-tabs" role="tablist">
+        <button id="tab-login" class="auth-tab active" type="button" onclick="switchTab('login')">Sign In</button>
+        <button id="tab-signup" class="auth-tab" type="button" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="form-login" class="auth-form" onsubmit="return doLogin(event)">
+        <label class="field-label" for="login-username">USERNAME</label>
+        <div class="auth-input">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+          <input id="login-username" name="username" type="text" placeholder="Enter your username" autocomplete="username" required>
+        </div>
+
+        <label class="field-label" for="login-password">PASSWORD</label>
+        <div class="auth-input">
+          <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 5v2"/></svg>
+          <input id="login-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+        </div>
+        <p id="login-err" class="auth-message"></p>
+        <button class="auth-submit" type="submit"><span>→</span> Sign In</button>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="form-signup" class="auth-form hidden" onsubmit="return doRegister(event)" style="display:none">
+        <label class="field-label" for="signup-username">USERNAME</label>
+        <div class="auth-input">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+          <input id="signup-username" name="username" type="text" placeholder="Choose a username" autocomplete="username" required>
+        </div>
+
+        <label class="field-label" for="signup-password">PASSWORD</label>
+        <div class="auth-input">
+          <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 5v2"/></svg>
+          <input id="signup-password" name="password" type="password" placeholder="At least 6 characters" autocomplete="new-password" minlength="6" required>
+        </div>
+
+        <label class="field-label" for="signup-confirm">CONFIRM PASSWORD</label>
+        <div class="auth-input">
+          <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 5v2"/></svg>
+          <input id="signup-confirm" name="confirm_password" type="password" placeholder="Confirm your password" autocomplete="new-password" minlength="6" required>
+        </div>
+        <p id="signup-err" class="auth-message"></p>
+        <p id="signup-ok" class="auth-success"></p>
+        <button class="auth-submit" type="submit"><span>＋</span> Create Account</button>
+      </form>
+
+      <div class="auth-divider"></div>
+      <div class="auth-help">Need help? Contact Admin</div>
+      <a class="auth-telegram-link" href="https://t.me/wargood_officiel" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24"><path d="M21.6 4.2 18.4 20c-.2 1.1-.8 1.4-1.7.9l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.4-4.9 8.9-8c.4-.4-.1-.6-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5L20 3.2c.9-.3 1.8.2 1.6 1z"/></svg> Telegram · Wargood Top 1 ↗
+      </a>
+      <div class="auth-tagline">OFFICIAL COMMUNITY <span>·</span> FF GLORY</div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/login.js') }}" defer></script>
+</body>
+</html>
